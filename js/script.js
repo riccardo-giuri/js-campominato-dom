@@ -60,7 +60,9 @@ function createCell(cellContent, cellPerRow) {
     cell.classList.add("square_box");
     cell.dataset.index = cellContent;
     cell.textContent = cellContent;
-    cell.style.flexBasis = `calc(100% / ${cellPerRow})`
+    cell.style.flexBasis = `calc(100% / ${cellPerRow})`;
+
+    cell.addEventListener("click", cellClick);
 
     return cell;
 }
@@ -70,6 +72,20 @@ function printGrid(gridtoPrint, htmlContainer) {
 
     for(let i = 0; i < gridtoPrint.length; i++) {       
         htmlContainer.append(gridtoPrint[i]);
+    }
+}
+
+function cellClick() {
+
+    if(this.dataset.Clicked === undefined) {
+        this.dataset.Clicked = "1";
+
+        if(this.dataset.Bomb === undefined){
+            this.classList.add("bg-primary")
+        }
+        else {
+            this.classList.add("bg-danger")
+        }
     }
 }
 
