@@ -5,6 +5,7 @@
 const newGameBtn = document.querySelector("#newGame_btn");
 const modeSelect = document.querySelector("#modeSelect");
 const gridContainer = document.querySelector(".square_container");
+const scoreContainer = document.querySelector("#score");
 
 newGameBtn.addEventListener("click", startNewGame);
 
@@ -12,6 +13,8 @@ newGameBtn.addEventListener("click", startNewGame);
 function startNewGame() {
     let grid = [];
     let bombPositions = [];
+    //reset score value
+    scoreContainer.textContent = "0";
 
     switch (parseInt(modeSelect.value)) {
         //facile
@@ -80,11 +83,16 @@ function cellClick() {
     if(this.dataset.Clicked === undefined) {
         this.dataset.Clicked = "1";
 
+        //you clicked on a clean cell
         if(this.dataset.Bomb === undefined){
-            this.classList.add("bg-primary")
+            this.classList.add("bg-primary");
+            let intScore = parseInt(scoreContainer.textContent);
+            intScore += 1;
+            scoreContainer.textContent = intScore.toString();
         }
+        //you clicked on a bomb
         else {
-            this.classList.add("bg-danger")
+            this.classList.add("bg-danger");
         }
     }
 }
